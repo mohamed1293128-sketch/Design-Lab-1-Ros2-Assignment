@@ -25,7 +25,7 @@ This repository contains a ROS 2 lab assignment built around **Turtlesim**. It b
 - **Runtime parameters** — configure pose, square side length, and movement speeds.
 - **Launch files** — start the simulation and relevant nodes together.
 
-## Repository structure
+## Lab Assignment structure
 
 ```text
 Design-Lab-1-Ros2-Assignment/
@@ -38,8 +38,7 @@ Design-Lab-1-Ros2-Assignment/
 │   └── srv/          # Speed.srv
 ├── my_packages/
 │   └── my_packages/  # ROS 2 Python nodes
-├── test_command.txt  # Useful commands for testing
-└── README.md
+└── test_command.txt  # Useful commands for testing
 ```
 
 ### Package responsibilities
