@@ -3,9 +3,9 @@
 <package format="3">
   <name>interfaces</name>
   <version>0.0.0</version>
-  <description>TODO: Package description</description>
-  <maintainer email="mohamed1293128@gmail.com">m</maintainer>
-  <license>TODO: License declaration</license>
+  <description>Custom ROS 2 messages, services, and actions for the Design Lab 1 assignment.</description>
+  <maintainer email="mohamed1293128@gmail.com">Mohamed Maged</maintainer>
+  <license>MIT</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
