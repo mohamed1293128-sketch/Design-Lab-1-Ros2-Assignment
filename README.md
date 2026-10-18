@@ -146,10 +146,14 @@ Add a screenshot of the running Turtlesim window and, if useful, a second screen
 
 ## Team
 
-_Add team member names and student IDs here._
+| Name | Student ID |
+| --- | ---: |
+| Mohamed Maged | 9392 |
+| Ahmed Abouelwafa Abdelmonsef | 9264 |
+| Belal Ahmed Mohamed | 9508 |
 
 ---
 
 ## License
 
-Add the license and its terms here if the project is intended to be distributed publicly.
+This project is licensed under the [MIT License](LICENSE). See the `LICENSE` file for the full license text.
