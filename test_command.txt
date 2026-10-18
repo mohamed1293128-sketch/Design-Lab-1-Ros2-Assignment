@@ -1,195 +1,58 @@
-# ROS 2 Test Commands — Design Lab 1
+# Test Commands
 
-This file is a practical test guide for the ROS 2 Jazzy assignment.
-Run commands from a terminal with ROS 2 Jazzy installed.
-
-## 1. Build and source the workspace
-
-Open a terminal in the workspace root (the directory containing `src/`).
-
-```bash
-source /opt/ros/jazzy/setup.bash
+# Build the workspace (run from the workspace root)
 colcon build --symlink-install
+
+# Source the workspace (run in every new terminal)
 source install/setup.bash
-```
 
-After opening a new terminal, source both setup files again:
-
-```bash
-source /opt/ros/jazzy/setup.bash
-source <workspace_path>/install/setup.bash
-```
-
-Replace `<workspace_path>` with the full path to your workspace. Do not type the angle brackets.
-
-## 2. Recommended: start the complete task
-
-In Terminal 1, from the workspace root:
-
-```bash
-source /opt/ros/jazzy/setup.bash
-source install/setup.bash
-ros2 launch bringup Task.launch.xml
-```
-
-This launch file starts Turtlesim, the pose-control action/service server, the square-drawing action server, and the reset service.
-
-Keep this terminal running. Run the test commands below in another terminal after sourcing ROS and the workspace.
-
-## 3. Inspect the running ROS graph
-
-```bash
-ros2 node list
-ros2 topic list
-ros2 service list
-ros2 action list
-ros2 interface show interfaces/srv/Speed
-ros2 interface show interfaces/action/GoToPose
-ros2 interface show interfaces/action/DrawSquare
-```
-
-Useful checks for the pose-control node:
-
-```bash
-ros2 node info /pose_control
-ros2 param list /pose_control
-ros2 param get /pose_control linear_velocity
-ros2 param get /pose_control angular_velocity
-```
-
-## 4. Test the custom Speed service
-
-The `/set_speed` service changes the linear and angular velocity parameters used by the pose controller.
-
-```bash
-ros2 service type /set_speed
-ros2 service call /set_speed interfaces/srv/Speed "{linear_velocity: 3.0, angular_velocity: 1.0}"
-```
-
-Test input validation (both speeds must be greater than zero):
-
-```bash
-ros2 service call /set_speed interfaces/srv/Speed "{linear_velocity: 0.0, angular_velocity: 1.0}"
-```
-
-Check the parameters again with `ros2 param get /pose_control linear_velocity` and `ros2 param get /pose_control angular_velocity`.
-
-## 5. Test the GoToPose action directly
-
-Send a target position and orientation to the turtle. The position uses Turtlesim coordinates; yaw is in radians.
-
-```bash
-ros2 action info /go_to_pose
-ros2 action send_goal /go_to_pose interfaces/action/GoToPose "{target_pose: {x: 1.0, y: 3.0, yaw: 1.57}}" --feedback
-```
-
-Try another target:
-
-```bash
-ros2 action send_goal /go_to_pose interfaces/action/GoToPose "{target_pose: {x: 8.0, y: 8.0, yaw: 0.0}}" --feedback
-```
-
-The action feedback reports the remaining distance and angle. Wait for a goal to finish before sending another one.
-
-## 6. Test the reset service
-
-This service lifts the pen, returns the turtle to the center/start pose, clears the drawing, and lowers the pen again.
-
-```bash
-ros2 service type /reset_node
-ros2 service call /reset_node std_srvs/srv/Trigger "{}"
-```
-
-## 7. Test drawing a square
-
-The simplest option is to send a goal to the DrawSquare action server. The side length must be greater than 0 and no more than 5.0.
-
-```bash
-ros2 action info /draw_square
-ros2 action send_goal /draw_square interfaces/action/DrawSquare "{side_length: 2.0}" --feedback
-```
-
-Try a different side length:
-
-```bash
-ros2 action send_goal /draw_square interfaces/action/DrawSquare "{side_length: 3.0}" --feedback
-```
-
-The server resets Turtlesim before drawing and reports feedback for each of the four sides.
-
-Alternatively, run the included action client (with the complete task launch still running):
-
-```bash
-ros2 run my_packages square_client --ros-args -p side_length:=2.0
-```
-
-Or launch the client with the side length from the package configuration:
-
-```bash
-ros2 launch bringup draw_square_client.launch.xml
-```
-
-## 8. Test the pose_set client and YAML parameters
-
-The `pose_set` node reads `x`, `y`, and `yaw` parameters and sends them as a GoToPose goal. The included YAML file is `bringup/config/pose.yaml`.
-
-Run the dedicated launch file in a separate, clean setup where another pose-control server is not already running:
-
-```bash
-ros2 launch bringup pose_set.launch.xml
-```
-
-That launch starts Turtlesim, pose control, and the `pose_set` client using the configured YAML values.
-
-To run the client manually while a compatible `/go_to_pose` action server is already running:
-
-```bash
-ros2 run my_packages pose_set --ros-args -p x:=3.0 -p y:=4.0 -p yaw:=0.0
-```
-
-## 9. Run nodes individually (optional)
-
-Only do this if you have not already started the same node through a launch file. Avoid starting duplicate servers with the same service/action names.
-
-```bash
+# Start Turtlesim
 ros2 run turtlesim turtlesim_node
+
+# Start the pose control server (provides /set_speed and /go_to_pose)
 ros2 run my_packages pose_control
+
+# Start the reset service
 ros2 run my_packages reset
+
+# Start the square drawing action server
 ros2 run my_packages square_draw
+
+# Set the turtle's target pose (requires pose_control to be running)
 ros2 run my_packages pose_set --ros-args -p x:=3.0 -p y:=4.0 -p yaw:=0.0
+
+# Draw a square with side length 2.0 (requires square_draw and its servers)
 ros2 run my_packages square_client --ros-args -p side_length:=2.0
-```
 
-Note: `pose_control`, `reset`, and `square_draw` are servers; `pose_set` and `square_client` are clients. The clients need their matching server(s) to be running.
+# Change linear and angular speed
+ros2 service call /set_speed interfaces/srv/Speed "{linear_velocity: 3.0, angular_velocity: 1.0}"
 
-## 10. Record and inspect a rosbag (optional)
+# Test invalid speed (should be rejected)
+ros2 service call /set_speed interfaces/srv/Speed "{linear_velocity: 0.0, angular_velocity: 1.0}"
 
-Record all currently published topics while testing:
+# Reset the turtle and clear the screen
+ros2 service call /reset_node std_srvs/srv/Trigger "{}"
 
-```bash
-ros2 bag record -a
-```
+# Send a target pose directly (x, y in turtlesim; yaw in radians)
+ros2 action send_goal /go_to_pose interfaces/action/GoToPose "{target_pose: {x: 1.0, y: 3.0, yaw: 1.57}}" --feedback
 
-Stop recording with Ctrl+C. Play a recorded bag by passing its directory:
+# Draw a square directly through the action
+ros2 action send_goal /draw_square interfaces/action/DrawSquare "{side_length: 2.0}" --feedback
 
-```bash
-ros2 bag play <bag_directory>
-```
+# Start the full task using the launch file instead of starting servers individually
+ros2 launch bringup Task.launch.xml
 
-Inspect a bag:
+# Run the pose client with values from pose.yaml
+ros2 launch bringup pose_set.launch.xml
 
-```bash
-ros2 bag info <bag_directory>
-```
+# Run the square client with side length from sidelegnth.yaml
+ros2 launch bringup draw_square_client.launch.xml
 
-Replace `<bag_directory>` with the actual bag folder path.
+# List active nodes
+ros2 node list
 
-## Troubleshooting
+# List available services
+ros2 service list
 
-- **Package or executable not found:** rebuild from the workspace root and source `install/setup.bash` in that terminal.
-- **Service/action not available:** check that its server is running with `ros2 service list` or `ros2 action list`.
-- **Custom interface not found:** ensure the `interfaces` package built successfully, then rebuild and source the workspace.
-- **Duplicate node/service/action:** do not start the same server both manually and through a launch file.
-- **Turtle doesn't move:** make sure Turtlesim and the `pose_control` server are running, then inspect `ros2 topic echo /turtle1/pose`.
-
-For the service and action commands, the server must remain running in another terminal.
+# List available actions
+ros2 action list
