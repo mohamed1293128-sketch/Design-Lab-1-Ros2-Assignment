@@ -3,9 +3,9 @@
 <package format="3">
   <name>my_packages</name>
   <version>0.0.0</version>
-  <description>TODO: Package description</description>
-  <maintainer email="mohamed1293128@gmail.com">m</maintainer>
-  <license>TODO: License declaration</license>
+  <description>Python ROS 2 nodes and clients for pose control, square drawing, and resetting Turtlesim.</description>
+  <maintainer email="mohamed1293128@gmail.com">Mohamed Maged</maintainer>
+  <license>MIT</license>
 
   <depend>rclpy</depend>
 
