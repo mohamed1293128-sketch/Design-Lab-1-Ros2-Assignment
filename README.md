@@ -122,17 +122,29 @@ ros2 run my_packages square_draw --ros-args -p side_length:=3.0
 
 For more test commands, see [`test_command.txt`](test_command.txt).
 
-## Turtlesim square-drawing demo
+## Visual demonstrations
 
-The video below demonstrates the ROS 2 Turtlesim square-drawing workflow.
+### Draw a square
 
-[**▶ Watch the square-drawing demonstration (MP4)**](assigmnent1.mp4)
+The GIF below shows the turtle completing the square-drawing workflow in Turtlesim.
 
-The recording is included in this repository as [`assigmnent1.mp4`](assigmnent1.mp4).
+<p align="center">
+  <img src="media/draw_square.gif" alt="Turtlesim drawing a square using the ROS 2 action workflow" width="600" />
+</p>
 
-## Evidence and screenshots
+### Set a target pose
 
-The demonstration video is provided above. Additional screenshots can be added here if needed, such as the final square in Turtlesim or terminal output showing action feedback.
+<p align="center">
+  <img src="media/set_pose.gif" alt="Demonstration of setting the turtle's target pose" width="600" />
+</p>
+
+### Reset Turtlesim
+
+<p align="center">
+  <img src="media/reset.gif" alt="Demonstration of resetting Turtlesim" width="600" />
+</p>
+
+The original recording is also available as [`assigmnent1.mp4`](assigmnent1.mp4).
 
 ## Team
 
