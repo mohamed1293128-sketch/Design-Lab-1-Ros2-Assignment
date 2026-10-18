@@ -124,25 +124,15 @@ For more test commands, see [`test_command.txt`](test_command.txt).
 
 ## Turtlesim square-drawing demo
 
-This section will show the turtle drawing a square using the ROS 2 action workflow.
+The video below demonstrates the ROS 2 Turtlesim square-drawing workflow.
 
-**Demo coming soon:** a short GIF or video will be added here after the square-drawing demonstration is recorded.
+[**▶ Watch the square-drawing demonstration (MP4)**](assigmnent1.mp4)
 
-<!--
-When ready, save the optimized GIF to media/turtlesim-square.gif and replace the placeholder above with:
-<p align="center">
-  <img src="media/turtlesim-square.gif" alt="Turtlesim turtle drawing a square" width="600" />
-</p>
--->
-
-Recommended demo content:
-- Show the turtle starting, tracing all four sides, and finishing the square.
-- Keep the terminal visible briefly if it shows action feedback or a successful result.
-- Prefer a short, cropped GIF (around 5–10 seconds); use a linked MP4 if the recording is long or large.
+The recording is included in this repository as [`assigmnent1.mp4`](assigmnent1.mp4).
 
 ## Evidence and screenshots
 
-Add a screenshot of the running Turtlesim window and, if useful, a second screenshot showing action feedback in the terminal. Store media in a small `media/` directory and use relative links so the images render directly in the README.
+The demonstration video is provided above. Additional screenshots can be added here if needed, such as the final square in Turtlesim or terminal output showing action feedback.
 
 ## Team
 
