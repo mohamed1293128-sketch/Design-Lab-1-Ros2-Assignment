@@ -144,7 +144,7 @@ The GIF below shows the turtle completing the square-drawing workflow in Turtles
   <img src="media/reset.gif" alt="Demonstration of resetting Turtlesim" width="600" />
 </p>
 
-The original recording is also available as [`assigmnent1.mp4`](assigmnent1.mp4).
+The original recording is also available as [`assigmnent1.mp4`](media/assigmnent1.mp4).
 
 ## Team
 
