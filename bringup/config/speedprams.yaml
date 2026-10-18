@@ -1,0 +1,4 @@
+pose_control_node:
+  ros__parameters:
+    linear_velocity: 3.0
+    angular_velocity: 1.0

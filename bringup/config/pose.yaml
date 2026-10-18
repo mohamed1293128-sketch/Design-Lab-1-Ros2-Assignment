@@ -1,0 +1,5 @@
+pose_set:
+  ros__parameters:
+    x: 3.0
+    y: 4.0
+    yaw: 0.0

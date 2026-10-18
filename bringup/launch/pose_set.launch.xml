@@ -1,0 +1,11 @@
+<launch>
+    <node pkg="my_packages" exec="pose_control" name="pose_control">
+        <param from="$(find-pkg-share bringup)/config/speedprams.yaml"/>
+    </node>
+    
+    <node pkg="my_packages" exec="pose_set" name="pose_set">
+        <param from="$(find-pkg-share bringup)/config/pose.yaml"/>
+    </node>
+
+    <node pkg="turtlesim" exec="turtlesim_node" name="turtlesim"/>
+</launch>

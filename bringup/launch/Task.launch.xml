@@ -1,0 +1,14 @@
+<!-- Step 7 -->
+<launch>
+  <node pkg="turtlesim" exec="turtlesim_node" name="turtlesim"/>
+
+  <node pkg="my_packages" exec="pose_control" name="pose_control">
+    <param from="$(find-pkg-share bringup)/config/speedprams.yaml"/>
+  </node>
+
+  <node pkg="my_packages" exec="square_draw" name="draw_square_node" output="screen">
+      <param from="$(find-pkg-share bringup)/config/sidelegnth.yaml"/>
+  </node>
+
+  <node pkg="my_packages" exec="reset" name="reset"/>
+</launch>

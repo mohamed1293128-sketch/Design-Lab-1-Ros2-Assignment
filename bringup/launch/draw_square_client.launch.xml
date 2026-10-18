@@ -1,0 +1,5 @@
+<launch>
+    <node pkg="my_packages" exec="square_client" name="square_client">
+        <param from="$(find-pkg-share bringup)/config/sidelegnth.yaml"/>
+    </node>
+</launch>

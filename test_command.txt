@@ -1,0 +1,9 @@
+ros2 action send_goal /go_to_pose interfaces/action/GoToPose   "{target_pose: {x: 1.0, y: 3.0, yaw: 1.57}}" --feedback
+
+ros2 service call /set_speed interfaces/srv/Speed "{linear_velocity: 3.0, angular_velocity: 4.0}"
+
+ros2 service call /reset_node std_srvs/srv/Trigger "{}"
+
+ros2 run my_packages square_draw --ros-args -p side_length:=3.0
+
+ros2 run <your_pkg> pose_set --ros-args --params-file <path>/pose.yaml
